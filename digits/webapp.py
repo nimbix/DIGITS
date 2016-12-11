@@ -82,4 +82,10 @@ for endpoint, function in app.view_functions.iteritems():
 
 ### Setup the environment
 
+if os.environ.get('DIGITS_FORCE_SSL'):
+    from werkzeug.contrib.fixers import ProxyFix
+    from flask_sslify import SSLify
+    app.wsgi_app = ProxyFix(app.wsgi_app)
+    SSLify(app, age=300, permanent=True
+
 scheduler.load_past_jobs()
